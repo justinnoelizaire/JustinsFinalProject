@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Basketball App</h1>
+    <p class="lead">Your one-stop destination for basketball statistics, rankings, and game schedules.</p>
+    {% if not current_user.is_authenticated %}
+        <hr class="my-4">
+        <p>Join our community to track your favorite teams and get personalized updates.</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Sign Up Now</a>
+    {% endif %}
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Player Stats</h5>
+                <p class="card-text">View detailed statistics of your favorite players.</p>
+                <a href="{{ url_for('stats') }}" class="btn btn-primary">View Stats</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Team Rankings</h5>
+                <p class="card-text">Check out the current team standings.</p>
+                <a href="{{ url_for('rankings') }}" class="btn btn-primary">View Rankings</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Game Schedule</h5>
+                <p class="card-text">Stay updated with upcoming games.</p>
+                <a href="{{ url_for('schedule') }}" class="btn btn-primary">View Schedule</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Team Rankings{% endblock %}
+
+{% block content %}
+<h2>Team Rankings</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Team</th>
+                                <th>Wins</th>
+                                <th>Losses</th>
+                                <th>Win %</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for team in teams %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ team.name }}</td>
+                                <td>{{ team.wins }}</td>
+                                <td>{{ team.losses }}</td>
+                                <td>{{ "%.3f"|format(team.wins / (team.wins + team.losses)) if (team.wins + team.losses) > 0 else "0.000" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

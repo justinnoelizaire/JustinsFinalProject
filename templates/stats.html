@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Player Stats{% endblock %}
+
+{% block content %}
+<h2>Player Statistics</h2>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Player Statistics Leaders</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th>Team</th>
+                                <th>Position</th>
+                                <th>PPG</th>
+                                <th>RPG</th>
+                                <th>APG</th>
+                                <th>SPG</th>
+                                <th>BPG</th>
+                                <th>FG%</th>
+                                <th>3P%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for player in players %}
+                            <tr>
+                                <td>{{ player.name }}</td>
+                                <td>{{ player.team.name }}</td>
+                                <td>{{ player.position }}</td>
+                                <td>{{ "%.1f"|format(player.points_per_game) }}</td>
+                                <td>{{ "%.1f"|format(player.rebounds_per_game) }}</td>
+                                <td>{{ "%.1f"|format(player.assists_per_game) }}</td>
+                                <td>{{ "%.1f"|format(player.steals_per_game) }}</td>
+                                <td>{{ "%.1f"|format(player.blocks_per_game) }}</td>
+                                <td>{{ "%.1f"|format(player.field_goal_percentage) }}%</td>
+                                <td>{{ "%.1f"|format(player.three_point_percentage) }}%</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Scoring Leaders</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>PPG</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for player in players[:10] %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ player.name }}</td>
+                                <td>{{ "%.1f"|format(player.points_per_game) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Assists Leaders</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>APG</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for player in players|sort(attribute='assists_per_game', reverse=true)[:10] %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ player.name }}</td>
+                                <td>{{ "%.1f"|format(player.assists_per_game) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

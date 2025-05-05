@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Game Schedule{% endblock %}
+
+{% block content %}
+<h2>Game Schedule</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Home Team</th>
+                                <th>Away Team</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for game in games %}
+                            <tr>
+                                <td>{{ game.date.strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>{{ game.home_team }}</td>
+                                <td>{{ game.away_team }}</td>
+                                <td>
+                                    {% if game.score_home is not none and game.score_away is not none %}
+                                        {{ game.score_home }} - {{ game.score_away }}
+                                    {% else %}
+                                        Upcoming
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
