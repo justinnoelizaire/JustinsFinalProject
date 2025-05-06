@@ -8,7 +8,7 @@ from datetime import datetime
 st.title('Basketball Analytics Dashboard')
 
 # Connect to the database
-@st.cache
+@st.cache_resource
 def get_connection():
     return sqlite3.connect('basketball.db')
 
